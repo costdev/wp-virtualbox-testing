@@ -21,15 +21,18 @@ More details on the VirtualBox issue:
 
 ## Installation
 
-To set up the watcher script, run the following commands as a one-time setup:
+To set up the watcher script as a service, run the following commands as a one-time setup:
 ```sh
-sudo curl -o /etc/init.d/wpclearcache.sh https://raw.githubusercontent.com/costdev/wp-virtualbox-testing/main/wpclearcache.sh
-sudo sed -i 's/\r$//' /etc/init.d/wpclearcache.sh
-sudo chmod 500 /etc/init.d/wpclearcache.sh
-sudo update-rc.d wpclearcache.sh defaults
+sudo curl -o /usr/local/bin/wpclearcache https://raw.githubusercontent.com/costdev/wp-virtualbox-testing/main/wpclearcache.sh
+sudo sed -i 's/\r$//' /usr/local/bin/wpclearcache
+sudo chmod 500 /usr/local/bin/wpclearcache
+sudo curl -o /etc/systemd/system/wpclearcache.service https://raw.githubusercontent.com/costdev/wp-virtualbox-testing/main/wpclearcache.service
+sudo systemctl daemon-reload
+sudo systemctl enable wpclearcache.service
+sudo systemctl start wpclearcache.service
 ```
 
-Restart the box. Once this is done, the watcher script should be running in your environment.
+The `wpclearcache` service should now be running and will be running when your environment is rebooted.
 
 To install the mu-plugin for your site, run the following commands (should be done for each site):
 ```sh
