@@ -1,0 +1,5 @@
+[Service]
+ExecStart=/usr/local/bin/wpclearcache
+
+[Install]
+WantedBy=default.target
